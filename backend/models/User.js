@@ -18,10 +18,26 @@ module.exports = (sequelize, DataTypes) => {
       models.User.hasMany(models.Comment)
     }
   };
+  
   User.init({
     lastName: { type: DataTypes.STRING, allowNull: false },
     firstName: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false, unique: true },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true,
+        isUnique(value) {
+          
+          return User.findOne({where:{email:value}})
+            .then((email) => {
+              if (email) {
+                throw new Error('Validation error: email already exist');
+              }
+            })
+        }
+      }
+    },
     password: { 
       type: DataTypes.STRING,
       allowNull: false,
@@ -31,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     bio: DataTypes.STRING,
-    birthday: DataTypes.STRING,
+    birthday: { type: DataTypes.STRING, isDate: true },
     picture: DataTypes.STRING,
     isAdmin: { type: DataTypes.BOOLEAN, allowNull: false }
   }, {

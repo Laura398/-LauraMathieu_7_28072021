@@ -28,9 +28,10 @@ exports.getOnePost = (req, res, next) => {
 // Modify one post
 exports.updatePost = (req, res, next) => {
     try {
-        const updatePost = Post.update({ ...req.body },
-                                    {where: {id: req.params.id}})
-                                    res.status(201).json({ message: 'Objet enregistré !'})
+        const updatePost = Post.update({
+            ...req.body
+        }, { where: {id: req.params.id} })
+        res.status(201).json({ message: 'Objet enregistré !'})
         if (!updatePost) throw ('Error while Updating');
         res(post).code(200);
     } catch (error) {

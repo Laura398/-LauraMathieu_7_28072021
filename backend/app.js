@@ -1,7 +1,11 @@
 // Imports
 const express = require('express');
 const bodyParser = require('body-parser');
-const sequelize = require('sequelize');
+const path = require('path');
+
+// Security
+const helmet = require('helmet');
+const noCache = require('nocache');
 
 // Routes
 const userRoutes = require('./routes/user');
@@ -10,6 +14,27 @@ const commentRoutes = require('./routes/comment');
 
 // Express
 const app = express();
+
+// Express Rate Limit
+const rateLimit = require('express-rate-limit');
+
+// Enable if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc) :
+// (see https://expressjs.com/en/guide/behind-proxies.html)
+// app.set('trust proxy', 1);
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, /*15 minutes*/
+  max: 500 // limit each IP to 100 requests per windowMs
+});
+
+// Apply to all requests
+app.use(limiter);
+
+// HTTP request security with Helmet
+app.use(helmet());
+
+// No Cache with Helmet
+app.use(noCache());
 
 // Body-parser urlencoded for req.body
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -31,6 +56,8 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 /*Routes path*/
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 app.use('/api/auth', userRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
