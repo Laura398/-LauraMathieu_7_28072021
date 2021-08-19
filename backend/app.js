@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require("cors");
 
 // Security
 const helmet = require('helmet');
@@ -14,6 +15,12 @@ const commentRoutes = require('./routes/comment');
 
 // Express
 const app = express();
+
+var corsOptions = {
+  origin: "http://localhost:8080"
+};
+
+app.use(cors(corsOptions));
 
 // Express Rate Limit
 const rateLimit = require('express-rate-limit');
