@@ -5,7 +5,7 @@
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
     <p class="card-text">{{post.content}}</p>
-    <p class="card-text"><small class="text-muted">{{post.User.firstName}} {{post.User.lastName}}, <span type="date">{{post.createdAt}}</span></small></p>
+    <p class="card-text"><small class="text-muted">{{post.User.firstName}} {{post.User.lastName}}, {{post.createdAt}}</small></p>
   </div>
 </div>
   </div>
@@ -19,7 +19,7 @@ export default {
   name: 'Posts',
   data () {
     return {
-      msg: 'Welcome to my Vuex Store'
+      msg: 'Welcome to my Vuex Store',
     }
   },
   computed: {
