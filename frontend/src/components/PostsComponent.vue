@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello col-md-6 m-auto">
     <div class="card mb-3" v-for='post in posts' :key='post.id'>
   <img class="card-img-top" src="https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg" alt="Card image cap">
   <div class="card-body">
@@ -17,14 +17,9 @@
 <script>
 export default {
   name: 'Posts',
-  data () {
-    return {
-      msg: 'Welcome to my Vuex Store',
-    }
-  },
   computed: {
     posts() {
-    return this.$store.state.posts
+      return this.$store.state.posts
     }
   },
   mounted() {
@@ -36,12 +31,6 @@ export default {
 </script>
 
 <style scoped>
-.hello {
-  width: 50%;
-  margin: auto;
-}
-.card-img-top {
-  max-width: 100%;
-  max-height: auto;
-}
+
+
 </style>

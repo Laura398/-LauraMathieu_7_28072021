@@ -1,11 +1,22 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/signup">Signup</router-link>
+    <NavComponent />
   </div>
   <router-view/>
 </template>
+
+<script>
+import NavComponent from '@/components/NavComponent.vue'
+
+export default {
+  name: 'Nav',
+  components: {
+    NavComponent
+  }
+}
+</script>
+
+
 
 <style lang="scss">
 #app {

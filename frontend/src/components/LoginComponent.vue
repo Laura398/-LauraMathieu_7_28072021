@@ -2,15 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col-8 mx-auto bg-light center border border-secondary rounded mt-4 p-4">
+      
       <form class="row g-3" method="post">
-        <div class="col-md-5 my-3 mx-auto">
-          <label for="validationDefault01" class="form-label">Prénom</label>
-          <input v-model="firstName" type="text" class="form-control" id="firstName" placeholder="Mark" required>
-        </div>
-        <div class="col-md-5 my-3 mx-auto">
-          <label for="validationDefault02" class="form-label">Nom</label>
-          <input v-model="lastName" type="text" class="form-control" id="lastName" placeholder="Otto" required>
-        </div>
         <div class="col-md-5 my-3 mx-auto">
           <label for="validationDefaultUsername" class="form-label">Adresse mail</label>
           <div class="input-group">
@@ -23,9 +16,10 @@
           <input v-model="password" type="text" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="password" required>
         </div>
         <div class="col-12 my-3">
-          <button class="btn btn-primary" type="submit" @click="signup()">S'inscrire</button>
+          <button class="btn btn-primary" type="submit" @click="login()">S'inscrire</button>
         </div>
       </form>
+<p></p>
     </div>
   </div>
 </div>
@@ -34,23 +28,20 @@
 <script>
 
 export default {
-  name: "Signup",
+  name: "Login",
   data: () => ({
-    firstName: '',
-    lastName: '',
     email: '',
     password: ''
   }),
   methods: {
-    signup() {
-        this.$store.dispatch("signup", {
-            firstName: this.firstName,
-            lastName: this.lastName,
+    login() {
+        console.log(this.$store);
+        this.$store.dispatch("login", {
             email: this.email,
             password: this.password
         });
         if (this.email.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && this.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/)) {
-          this.$router.push("/login");
+          this.$router.push("/posts");
         }
     }
   }
