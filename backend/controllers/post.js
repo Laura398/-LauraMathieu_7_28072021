@@ -13,7 +13,7 @@ exports.createPost = (req, res, next) => {
 
 // Get all posts
 exports.getAllPosts = async (req, res, next) => {
-    Post.findAll({ include: User })
+    Post.findAll({ include: {all: true}, })
       .then(posts => res.status(200).json(posts))
       .catch(error => res.status(400).json({ error }));
 };

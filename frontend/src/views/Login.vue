@@ -1,6 +1,6 @@
 <template>
   <div class="login container">
-    <h1 class="h5">Veuillez vous enregistrer afin d'accéder au réseau social.</h1>
+    <h1 class="h5">Veuillez vous connecter afin d'accéder au réseau social.</h1>
     <LoginComponent />
   </div>
 </template>

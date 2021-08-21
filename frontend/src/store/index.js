@@ -6,23 +6,30 @@ export default createStore({
 
   state: {
     posts: [],
+    comments: [],
+    oneUser: [],
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     display: false,
-    text: "Notification placeholder text",
+    notText: "Notification placeholder text",
     class: "success",
     userToken: JSON.parse(localStorage.getItem('token')),
   },
 
   getters: {
+    
   },
 
   mutations: {
     //Posts
     SET_POSTS(state, posts) {
       state.posts = posts
+    },
+    //Comments
+    SET_COMMENTS(state, comments) {
+      state.comments = comments
     },
     // Register
     SET_USER(state, user) {
@@ -31,10 +38,14 @@ export default createStore({
       state.email = user.email,
       state.password = user.password
     },
+    // Display one user
+    SET_ONE_USER(state, oneUser) {
+      state.oneUser = oneUser
+    },
     // Response from API
-    SET_NOTIFICATION: (state, { display, text, alertClass }) => {
+    SET_NOTIFICATION: (state, { display, notText, alertClass }) => {
       state.notification.display = display;
-      state.notification.text = text;
+      state.notification.notText = notText;
       state.notification.class = alertClass;
     },
   },
@@ -88,6 +99,78 @@ export default createStore({
       })
           .then(response => {
               commit('SET_POSTS', response.data)
+      })
+    },
+
+    // Add a post
+    addPost({commit}, payload) {
+      const token = JSON.parse(localStorage.getItem('token'));
+      return new Promise((resolve, reject) => {
+        axios.post('http://localhost:3000/api/post', payload, { 
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then(({data, status}) => {
+          if (status === 200) {
+            resolve(true);
+            console.log(commit, data);
+          }
+        })
+        .catch (error => {
+          reject(error);
+        })
+      });
+    },
+
+    // Get comments
+    getComments({ commit }) {
+      const token = JSON.parse(localStorage.getItem('token'));
+      axios.get('http://localhost:3000/api/comment', { 
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      })
+          .then(response => {
+              commit('SET_COMMENTS', response.data)
+      })
+    },
+
+    // Post comment
+    // Signup
+    postComment({commit}, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post('http://localhost:3000/api/comment', payload)
+        .then(({data, status}) => {
+          if (status === 200) {
+            resolve(true);
+            console.log(commit, data);
+          }
+        })
+        .catch (error => {
+          reject(error);
+        })
+      });
+    },
+
+    // Get one user
+    getOneUser({ commit }) {
+      const userId = JSON.parse(localStorage.getItem('userId'));
+      const token = JSON.parse(localStorage.getItem('token'));
+      axios.get(`http://localhost:3000/api/auth/${userId}`, { 
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      })
+          .then(response => {
+              commit('SET_ONE_USER', response.data)
+              console.log(response.data)
       })
     },
 

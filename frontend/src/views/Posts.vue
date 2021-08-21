@@ -1,17 +1,22 @@
 <template>
   <div class="post container">
-    <PostsComponent />
+    <div class="row">
+      <div class="col-md-4"><ProfileComponent /></div>
+    
+      <PostsComponent />
+    </div>
   </div>
 </template>
 
 <script>
 import PostsComponent from '@/components/PostsComponent.vue'
-
+import ProfileComponent from '@/components/ProfileComponent.vue'
 
 export default {
-  name: 'Posts',
+  name: ['Posts', 'Profile'],
   components: {
-    PostsComponent
+    PostsComponent,
+    ProfileComponent
   }
 }
 </script>
