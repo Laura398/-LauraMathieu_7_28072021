@@ -7,13 +7,14 @@
         <h5 class="card-title">{{post.title}}</h5>
         <p class="card-text">{{post.content}}</p>
         <p class="card-text"><small class="text-muted">{{post.User.firstName}} {{post.User.lastName}}, {{post.createdAt}}</small></p>
+        <hr v-if="post.UserId = UserId">
       </div>
       <hr>
       <div v-for='comment in comments' :key='comment.PostId'>
         <div v-if="comment.PostId === post.id">
+          <hr>
           <p>{{comment.text}}</p>
           <p class="card-text"><small class="text-muted">{{comment.User.firstName}} {{comment.User.lastName}}, {{comment.createdAt}}</small></p>
-          <hr>
         </div>
       </div>
     </div>

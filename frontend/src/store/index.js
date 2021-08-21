@@ -141,7 +141,6 @@ export default createStore({
     },
 
     // Post comment
-    // Signup
     postComment({commit}, payload) {
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:3000/api/comment', payload)
@@ -172,6 +171,20 @@ export default createStore({
               commit('SET_ONE_USER', response.data)
               console.log(response.data)
       })
+    },
+
+    // Modify Profile
+    modifyProfile({commit}, payload) {
+      const userId = JSON.parse(localStorage.getItem('userId'));
+      const token = JSON.parse(localStorage.getItem('token'));
+        axios.put(`http://localhost:3000/api/auth/${userId}`, { 
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }, payload
+        })
+      console.log(commit)
     },
 
     // Redirect
