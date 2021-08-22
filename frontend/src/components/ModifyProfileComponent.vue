@@ -2,7 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col-8 mx-auto bg-light center border border-secondary rounded mt-4 p-4">
-      <form class="row g-3" method="put">
+      <a class="btn btn-primary m-2" href="http://localhost:8080/#/posts" role="button">Retour</a>
+      <div class="row g-3">
         <div class="col-md-5 my-3 mx-auto">
           <label for="validationDefault01" class="form-label">Prénom : {{firstName}}</label>
           <input v-model="firstName" type="text" class="form-control" id="firstName" placeholder="Mark">
@@ -33,15 +34,18 @@
           <input v-model="password" type="text" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="password">
         </div>
         <div class="col-12 my-3">
-          <button class="btn btn-primary" type="submit" @click="modifyProfile()">Modifier</button>
+          <input type="submit" class="btn btn-primary my-2" :onclick="modifyProfile" value="Modifier"><br/>
+          <input type="submit" class="btn btn-danger my-2" :onclick="deleteUser" value="Supprimer le compte">
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'ProfilePage', 
   data: () => ({
@@ -51,22 +55,38 @@ export default {
     password: '',
     birthday: '',
     bio: '',
-    picture: ''
+    picture: '',
+    UserId: ''
   }),
   methods: {
     modifyProfile() {
-        this.$store.dispatch("modifyProfile", {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-            password: this.password,
-            birthday: this.birthday,
-            bio: this.bio,
-            picture: this.picture
-        });
-        
+      if (this.firstname != '') {this.$store.dispatch("modifyProfile", { firstName: this.firstName })}
+      if (this.lastName != '') {this.$store.dispatch("modifyProfile", { lastName: this.lastName })}
+      if (this.email != '') {this.$store.dispatch("modifyProfile", { email: this.email })}
+      if (this.password != '') {this.$store.dispatch("modifyProfile", { password: this.password })}
+      if (this.birthday != '') {this.$store.dispatch("modifyProfile", { birthday: this.birthday })}
+      if (this.bio != '') {this.$store.dispatch("modifyProfile", { bio: this.bio })}
+      if (this.picture != '') {this.$store.dispatch("modifyProfile", { picture: this.picture })}
+    },
+    deleteUser() {
+    if ( confirm( "La suppression du compte utilisateur est définitive !" ) ) {
+    // Code à éxécuter si le l'utilisateur clique sur "OK"
+    const token = JSON.parse(localStorage.getItem('token'));
+      const userId = JSON.parse(localStorage.getItem('userId'));
+      axios.delete(`http://localhost:3000/api/auth/${userId}`, { 
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      });
+      localStorage.clear();
+      this.$router.push("/signup");
     }
-  }
+    }
+  },
+  
+  
 }
 </script>
 

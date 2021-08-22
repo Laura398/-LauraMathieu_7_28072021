@@ -53,9 +53,9 @@ export default createStore({
   actions: {
 
     // Signup
-    signup({commit}, payload) {
+    signup({commit}, data) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/api/auth/signup', payload)
+        axios.post('http://localhost:3000/api/auth/signup', data)
         .then(({data, status}) => {
           if (status === 200) {
             resolve(true);
@@ -69,9 +69,9 @@ export default createStore({
     },
 
     // Login
-    login({commit}, payload) {
+    login({commit}, data) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/api/auth/login', payload)
+        axios.post('http://localhost:3000/api/auth/login', data)
         .then(({data, status}) => {
           if (status === 200) {
             resolve(true);
@@ -79,6 +79,7 @@ export default createStore({
             localStorage.setItem('token', JSON.stringify(data.token));
             localStorage.setItem('userId', JSON.stringify(data.userId));
             localStorage.setItem('isAdmin', JSON.stringify(data.isAdmin));
+            router.push("/posts");
           }
         })
         .catch (error => {
@@ -103,10 +104,10 @@ export default createStore({
     },
 
     // Add a post
-    addPost({commit}, payload) {
+    addPost({commit}, data) {
       const token = JSON.parse(localStorage.getItem('token'));
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/api/post', payload, { 
+        axios.post('http://localhost:3000/api/post', data, { 
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -141,9 +142,16 @@ export default createStore({
     },
 
     // Post comment
-    postComment({commit}, payload) {
+    postComment({commit}, data) {
+      const token = JSON.parse(localStorage.getItem('token'));
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/api/comment', payload)
+        axios.post('http://localhost:3000/api/comment', data, { 
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
         .then(({data, status}) => {
           if (status === 200) {
             resolve(true);
@@ -173,18 +181,26 @@ export default createStore({
       })
     },
 
-    // Modify Profile
-    modifyProfile({commit}, payload) {
+    // Profile change
+    modifyProfile({commit}, data) {
       const userId = JSON.parse(localStorage.getItem('userId'));
       const token = JSON.parse(localStorage.getItem('token'));
-        axios.put(`http://localhost:3000/api/auth/${userId}`, { 
+        axios.put(`http://localhost:3000/api/auth/${userId}`, data, { 
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
-          }, payload
+          }
         })
-      console.log(commit)
+        .then(({data, status}) => {
+          if (status === 200) {
+            console.log(commit, data);
+            alert("New Task record updated successfully!");
+          }
+        })
+        .catch (error => {
+          console.log(error);
+        });
     },
 
     // Redirect

@@ -39,9 +39,7 @@ export default {
             email: this.email,
             password: this.password
         });
-        if (this.email.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/) && this.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/)) {
-          this.$router.push('/posts')
-        }
+        this.$router.push('/')
     }
   }
 }
