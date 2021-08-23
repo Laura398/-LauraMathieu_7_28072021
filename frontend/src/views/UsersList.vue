@@ -1,18 +1,18 @@
 <template>
   <div class="modify container">
     <a class="btn btn-primary float-left" role="button" href="http://localhost:8080/#/">Retour</a>
-    <h1 class="h5">Vous pouvez modifier votre message ici.</h1>
-    <ModifyPostComponent />
+    <h1 class="h5 mb-5">Voici une liste des utilisateurs.</h1>
+    <UsersListAdmin />
   </div>
 </template>
 
 <script>
-import ModifyPostComponent from '@/components/ModifyPostComponent.vue'
+import UsersListAdmin from '@/components/UsersListComponent.vue'
 
 export default {
-  name: 'ModifyPost',
+  name: 'UsersList',
   components: {
-    ModifyPostComponent
+    UsersListAdmin
   }
 }
 </script>

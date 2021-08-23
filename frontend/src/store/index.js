@@ -217,7 +217,14 @@ export default createStore({
 
     // Get all users
     getAllUsers({ commit }) {
-      axios.get(`http://localhost:3000/api/auth/`)
+      const token = JSON.parse(localStorage.getItem('token'));
+      axios.get(`http://localhost:3000/api/auth/`, { 
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      })
           .then(response => {
               commit('SET_ALL_USERS', response.data)
               console.log(response.data)

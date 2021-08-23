@@ -1,14 +1,14 @@
 <template>
   <div class="hello col-md-8 m-auto">
-    <div class="card mb-3" v-for='post in posts' :key='post.id'>
+    <div class="card mb-3" v-for='post in posts.slice().reverse()' :key='post.id'>
       <img class="card-img-top" :src="post.attachment" alt="Card image cap" v-if="post.attachment">
       <div class="card-body">
         <h5 class="card-title">{{post.title}}</h5>
         <p class="card-text">{{post.content}}</p>
         <p class="card-text"><small class="text-muted">{{post.User.firstName}} {{post.User.lastName}}, {{post.createdAt}}</small></p>
         <hr v-if="post.User.id === UserId">
-        <input v-if="post.User.id === UserId" type="submit" class="btn-primary col-4 mx-4" v-bind="post.id" @click="PostId = post.id" :onclick="modifyAPost" value="Modifier">
-        <input v-if="post.User.id === UserId" type="submit" class="btn-danger col-4 mx-4" v-bind="post.id" @click="PostId = post.id" :onclick="deletePost" value="Supprimer">
+        <input v-if="post.User.id === UserId || isAdmin === true" type="submit" class="btn-primary col-4 mx-4" v-bind="post.id" @click="PostId = post.id" :onclick="modifyAPost" value="Modifier">
+        <input v-if="post.User.id === UserId || isAdmin === true" type="submit" class="btn-danger col-4 mx-4" v-bind="post.id" @click="PostId = post.id" :onclick="deletePost" value="Supprimer">
       </div>
       <hr>
       <div>
@@ -25,8 +25,8 @@
           <hr>
           <p>{{comment.text}}</p>
           <p class="card-text"><small class="text-muted">{{comment.User.firstName}} {{comment.User.lastName}}, {{comment.createdAt}}</small></p>
-          <input v-if="comment.User.id === UserId" type="submit" class="btn-primary col-4 mx-4" v-bind="comment.id" @click="CommentId = comment.id" :onclick="modifyAComment" value="Modifier">
-          <input v-if="comment.User.id === UserId" type="submit" class="btn-danger col-4 mx-4" v-bind="comment.id" @click="CommentId = comment.id" :onclick="deleteComment" value="Supprimer">
+          <input v-if="comment.User.id === UserId || isAdmin === true" type="submit" class="btn-primary col-4 mx-4" v-bind="comment.id" @click="CommentId = comment.id" :onclick="modifyAComment" value="Modifier">
+          <input v-if="comment.User.id === UserId || isAdmin === true" type="submit" class="btn-danger col-4 mx-4" v-bind="comment.id" @click="CommentId = comment.id" :onclick="deleteComment" value="Supprimer">
         </div>
       </div>
     </div>
@@ -42,7 +42,8 @@ export default {
     text: "",
     UserId: JSON.parse(localStorage.getItem('userId')),
     PostId: '',
-    CommentId: ''
+    CommentId: '',
+    isAdmin: JSON.parse(localStorage.getItem('isAdmin'))
   }),
   computed: {
     posts() {

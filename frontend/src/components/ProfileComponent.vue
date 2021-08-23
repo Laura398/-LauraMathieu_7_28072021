@@ -11,6 +11,7 @@
             </div>
 
             <a class="btn btn-primary m-2" href="http://localhost:8080/#/profile" role="button">Voir le profil</a>
+            <a v-if="isAdmin === true" class="btn btn-primary m-2" href="http://localhost:8080/#/users" role="button">Voir les utilisateurs</a>
             <button class="btn btn-danger m-2" @click="signout()">Déconnexion</button>
 
         </div>
@@ -20,6 +21,9 @@
 <script>
 export default {
   name: 'Profile',
+  data: () => ({
+    isAdmin: JSON.parse(localStorage.getItem('isAdmin'))
+  }),
   methods: {
       signout() {
           localStorage.clear();
