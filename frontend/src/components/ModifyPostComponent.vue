@@ -16,7 +16,7 @@
             <input v-model="attachment" type="text" class="form-control" placeholder="Exemple" id="attachment" aria-describedby="inputGroupPrepend2">
         </div>
         <div class="col-12 my-3">
-          <button class="btn btn-primary" type="submit" @click="addPost()">Ajouter le post</button>
+          <button class="btn btn-primary" type="submit" @click="modifyAPost()">Modifier le post</button>
         </div>
       </form>
     </div>
@@ -27,7 +27,7 @@
 <script>
 
 export default {
-  name: "AddPost",
+  name: "ModifyPost",
   data: () => ({
     title: '',
     content: '',
@@ -35,15 +35,14 @@ export default {
     UserId: ''
   }),
   methods: {
-    addPost() {
-        this.$store.dispatch("addPost", {
-            title: this.title,
-            content: this.content,
-            attachment: this.attachment,
-            UserId: JSON.parse(localStorage.getItem('userId'))
-        });
-        this.$router.push("/posts");
-    }
+    modifyAPost() {
+      if (this.title != '') {this.$store.dispatch("modifyPost", { title: this.title })}
+      if (this.content != '') {this.$store.dispatch("modifyPost", { content: this.content })}
+      if (this.attachment != '') {this.$store.dispatch("modifyPost", { attachment: this.attachment })}
+      localStorage.removeItem('postId');
+      this.$router.push("/");
+    },
   }
 }
 </script>
+

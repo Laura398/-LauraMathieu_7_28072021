@@ -5,6 +5,7 @@ import router from '../router'
 export default createStore({
 
   state: {
+    users: [],
     posts: [],
     comments: [],
     oneUser: [],
@@ -42,6 +43,10 @@ export default createStore({
     SET_ONE_USER(state, oneUser) {
       state.oneUser = oneUser
     },
+    // Display one user
+    SET_ALL_USERS(state, users) {
+      state.users = users
+    },
     // Response from API
     SET_NOTIFICATION: (state, { display, notText, alertClass }) => {
       state.notification.display = display;
@@ -60,6 +65,8 @@ export default createStore({
           if (status === 200) {
             resolve(true);
             console.log(commit, data);
+          } else if (status === 400) {
+            alert("erreur")
           }
         })
         .catch (error => {
@@ -117,13 +124,35 @@ export default createStore({
         .then(({data, status}) => {
           if (status === 200) {
             resolve(true);
-            console.log(commit, data);
-          }
+            console.log("yaaaaaay!", commit, status, data);
+          } else {console.log(commit, status, data);}
         })
         .catch (error => {
           reject(error);
         })
       });
+    },
+
+    // Modify a post
+    modifyPost({commit}, data) {
+      const postId = JSON.parse(localStorage.getItem('postId'));
+      const token = JSON.parse(localStorage.getItem('token'));
+        axios.put(`http://localhost:3000/api/post/${postId}`, data, { 
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then(({data, status}) => {
+          if (status === 200) {
+            console.log(commit, data);
+            alert("New Task record updated successfully!");
+          }
+        })
+        .catch (error => {
+          console.log(error);
+        });
     },
 
     // Get comments
@@ -162,6 +191,37 @@ export default createStore({
           reject(error);
         })
       });
+    },
+
+    // Modify a comment
+    modifyComment({commit}, data) {
+      const commentId = JSON.parse(localStorage.getItem('commentId'));
+      const token = JSON.parse(localStorage.getItem('token'));
+        axios.put(`http://localhost:3000/api/comment/${commentId}`, data, { 
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+        .then(({data, status}) => {
+          if (status === 200) {
+            console.log(commit, data);
+            alert("New Task record updated successfully!");
+          }
+        })
+        .catch (error => {
+          console.log(error);
+        });
+    },
+
+    // Get all users
+    getAllUsers({ commit }) {
+      axios.get(`http://localhost:3000/api/auth/`)
+          .then(response => {
+              commit('SET_ALL_USERS', response.data)
+              console.log(response.data)
+      })
     },
 
     // Get one user

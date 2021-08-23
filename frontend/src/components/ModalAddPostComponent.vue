@@ -9,7 +9,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-8 mx-auto bg-light center border border-secondary rounded mt-4 p-4">
-                  <form class="row g-3" method="post">
+                  <div class="row g-3">
                     <div class="col-md-10 my-3 mx-auto">
                       <label for="validationDefault01" class="form-label">Titre</label>
                       <input v-model="title" type="text" class="form-control" id="title" placeholder="Ecrivez le titre" required>
@@ -23,9 +23,9 @@
                         <input v-model="attachment" type="text" class="form-control" placeholder="Exemple" id="attachment" aria-describedby="inputGroupPrepend2">
                     </div>
                     <div class="col-12 my-3">
-                      <button class="btn btn-primary" type="submit" @click="addPost()">Ajouter le post</button>
+                      <button class="btn btn-primary" type="submit" @click="addAPost">Ajouter le post</button>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -44,14 +44,18 @@ export default {
     UserId: ''
   }),
   methods: {
-    addPost() {
+    addAPost() {
+      if (this.title == '' || this.content == '') {
+        alert("Veuillez remplir correctement les informations")
+      } else {
         this.$store.dispatch("addPost", {
             title: this.title,
             content: this.content,
             attachment: this.attachment,
             UserId: JSON.parse(localStorage.getItem('userId'))
         })
-    }
+        window.location.reload();
+    }}
   }
 }
 </script>
