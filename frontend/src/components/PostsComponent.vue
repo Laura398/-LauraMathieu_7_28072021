@@ -5,8 +5,8 @@
       <div class="card-body">
         <h5 class="card-title">{{post.title}}</h5>
         <p class="card-text">{{post.content}}</p>
-        <p class="card-text"><small class="text-muted">{{post.User.firstName}} {{post.User.lastName}}, {{post.createdAt}}</small></p>
-        <hr v-if="post.User.id === UserId">
+        <p class="card-text"><small class="text-muted">{{post.User.firstName}} {{post.User.lastName}}, {{formatDate(post.createdAt)}}</small></p>
+      <hr v-if="post.User.id === UserId">
         <input v-if="post.User.id === UserId || isAdmin === true" type="submit" class="btn-primary col-4 mx-4" v-bind="post.id" @click="PostId = post.id" :onclick="modifyAPost" value="Modifier">
         <input v-if="post.User.id === UserId || isAdmin === true" type="submit" class="btn-danger col-4 mx-4" v-bind="post.id" @click="PostId = post.id" :onclick="deletePost" value="Supprimer">
       </div>
@@ -24,7 +24,7 @@
         <div v-if="comment.PostId === post.id">
           <hr>
           <p>{{comment.text}}</p>
-          <p class="card-text"><small class="text-muted">{{comment.User.firstName}} {{comment.User.lastName}}, {{comment.createdAt}}</small></p>
+          <p class="card-text"><small class="text-muted">{{comment.User.firstName}} {{comment.User.lastName}}, {{Date(comment.createdAt)}}</small></p>
           <input v-if="comment.User.id === UserId || isAdmin === true" type="submit" class="btn-primary col-4 mx-4" v-bind="comment.id" @click="CommentId = comment.id" :onclick="modifyAComment" value="Modifier">
           <input v-if="comment.User.id === UserId || isAdmin === true" type="submit" class="btn-danger col-4 mx-4" v-bind="comment.id" @click="CommentId = comment.id" :onclick="deleteComment" value="Supprimer">
         </div>
@@ -56,6 +56,17 @@ export default {
   methods: {
     getCommentsByPostId(PostId) {
       return this.$store.state.comments.find(comments => comments.PostId === PostId)
+    },
+    formatDate(date) {
+      var d = new Date(date),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+      if (month.length < 2) 
+          month = '0' + month;
+      if (day.length < 2) 
+          day = '0' + day;
+      return [day, month, year].join('-');
     },
     postAComment() {
       this.$store.dispatch("postComment", {

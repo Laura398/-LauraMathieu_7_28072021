@@ -106,7 +106,7 @@ export default createStore({
         }
       })
           .then(response => {
-              commit('SET_POSTS', response.data)
+              commit('SET_POSTS', response.data);
       })
     },
 

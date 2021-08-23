@@ -24,7 +24,7 @@ router.post('/signup', passwordSchema, userCtrl.signup);
 router.post('/login', createAccountLimiter, userCtrl.login);
 router.get('/', auth, userCtrl.getAllUsers);
 router.get('/:id', auth, userCtrl.getOneUser);
-router.put('/:id', multer, userCtrl.updateUser);
+router.put('/:id', auth, multer, userCtrl.updateUser);
 router.delete('/:id', auth, userCtrl.deleteUser);
 
 module.exports = router;
