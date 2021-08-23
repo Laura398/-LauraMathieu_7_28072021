@@ -23,11 +23,6 @@
            <p class="h3">Biographie :</p>
            <p class="h5">{{oneUser.bio}}</p>
        </div>
-       <div class="row bg-light px-4 py-2">
-           <a class="btn btn-primary m-2" href="http://localhost:8080/#/posts" role="button">Retour</a>
-           <a class="btn btn-primary m-2" href="http://localhost:8080/#/modify-profile" role="button">Modifier le profil</a>
-           <a class="btn btn-primary m-2" href="#" role="button">Supprimer le compte</a>
-       </div>
    </div>
 </template>
 

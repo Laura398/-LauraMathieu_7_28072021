@@ -11,7 +11,6 @@
             </div>
 
             <a class="btn btn-primary m-2" href="http://localhost:8080/#/profile" role="button">Voir le profil</a>
-            <a class="btn btn-primary m-2" href="http://localhost:8080/#/modify-profile" role="button">Modifier le profil</a>
             <button class="btn btn-danger m-2" @click="signout()">Déconnexion</button>
 
         </div>

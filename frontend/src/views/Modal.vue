@@ -1,26 +1,26 @@
 <template>
     <div class="container my-5">
         <h1 class="mb-5">Une modale en Vue JS !</h1>
-        <Modal v-bind:revel="revel" v-bind:toggleModal="toggleModal" />
+        <ModalProfile v-bind:revel="revel" v-bind:toggleModal="toggleModal" />
         <div v-on:click="toggleModal" class="btn btn-success">Ouvre la modale</div>
     </div>
 </template>
 
 <script>
-import Modal from '@/components/ModalComponent.vue'
+import ModalProfile from '@/components/ModalProfileComponent.vue'
 
 export default {
     components: {
-        Modal
+        ModalProfile
     },
     data() {
         return {
-            revele: false
+            revel: false
         }
     },
     methods: {
         toggleModal() {
-            this.revel = !this.revele
+            console.log("hello")
         }
     }
 }

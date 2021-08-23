@@ -1,5 +1,5 @@
 <template>
-  <div class="hello col-md-6 m-auto">
+  <div class="hello col-md-8 m-auto">
     <a class="btn btn-primary m-2" href="http://localhost:8080/#/add-post" role="button">Ajouter un message</a>
     <div class="card mb-3" v-for='post in posts' :key='post.id'>
       <img class="card-img-top" :src="post.attachment" alt="Card image cap" v-if="post.attachment">
