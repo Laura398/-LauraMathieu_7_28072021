@@ -1,5 +1,5 @@
 <template>
-  <div class="hello col-md-8 m-auto">
+   <div class="hello col-md-8 m-auto">
     <div class="card mb-3" v-for='post in posts.slice().reverse()' :key='post.id'>
       <img class="card-img-top" :src="post.attachment" alt="Card image cap" v-if="post.attachment">
       <div class="card-body">

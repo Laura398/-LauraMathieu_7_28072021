@@ -3,7 +3,7 @@
        <div class="row bg-danger m-1 p-1">
            <div class="col-3 bg-warning m-1 p-1">
                <img v-if="oneUser.picture" :src="oneUser.picture" alt="Photo de profil">
-                <img v-if="!oneUser.picture" src="https://puu.sh/I5mQA/f1763c6188.png" alt="Photo de profil">
+                <img v-if="!oneUser.picture" src="https://puu.sh/I5mQA/f1763c6188.png" alt="Photo de profil" class="rounded-circle">
            </div>
            <div class="col-8 m-auto bg-secondary">
                <h1 class="h3">{{oneUser.firstName}} {{oneUser.lastName}}</h1>

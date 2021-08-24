@@ -16,7 +16,7 @@
           <input v-model="password" type="text" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="password" required>
         </div>
         <div class="col-12 my-3">
-          <button class="btn btn-primary" type="submit" @click="login()">Connexion</button>
+          <button class="btn" type="submit" @click="login()">Connexion</button>
         </div>
       </form>
 <p></p>
@@ -44,3 +44,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+button {
+  background-color: #9f3e44;
+  color: white;
+}
+</style>
