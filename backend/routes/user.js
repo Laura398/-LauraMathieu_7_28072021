@@ -16,7 +16,6 @@ const createAccountLimiter = rateLimit({
 });
 
 const auth = require('../middleware/auth');
-const multer = require('../middleware/multer-config');
 
 const userCtrl = require('../controllers/user');
 
@@ -24,7 +23,7 @@ router.post('/signup', passwordSchema, userCtrl.signup);
 router.post('/login', createAccountLimiter, userCtrl.login);
 router.get('/', auth, userCtrl.getAllUsers);
 router.get('/:id', auth, userCtrl.getOneUser);
-router.put('/:id', auth, multer, userCtrl.updateUser);
+router.put('/:id', auth, userCtrl.updateUser);
 router.delete('/:id', auth, userCtrl.deleteUser);
 
 module.exports = router;
