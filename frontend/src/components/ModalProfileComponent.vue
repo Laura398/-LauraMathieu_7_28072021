@@ -108,7 +108,8 @@ export default {
     padding: 30px;
     position: center;
     top: -50%;
-    left: 10%;
+    left: -60%;
+    width: 150%;
 }
 
 .btn-modal {
@@ -122,5 +123,17 @@ img {
     height: 200px;
     margin-top: 2px;
     margin-left: 2px;
+}
+
+@media all and (max-width: 768px){
+  .modal-card {
+    background: #f1f1f1;
+    color: #333;
+    padding: 30px;
+    position: center;
+    top: -50%;
+    left: 0;
+    width: 150%;
+}
 }
 </style>

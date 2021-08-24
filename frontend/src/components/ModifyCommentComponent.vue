@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container-comment-modify">
   <div class="row">
     <div class="col-8 mx-auto bg-light center border border-secondary rounded mt-4 p-4">
       <form class="row g-3" method="post">
@@ -34,3 +34,9 @@ export default {
 }
 </script>
 
+<style scoped>
+.container-comment-modify {
+  padding-top: 50px;
+  padding-bottom: 500px;
+}
+</style>

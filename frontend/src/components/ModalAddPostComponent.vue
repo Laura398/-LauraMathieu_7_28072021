@@ -89,7 +89,7 @@ export default {
     padding: 30px;
     position: center;
     top: -50%;
-    left: 10%;
+    left: 0;
 }
 
 .btn-modal {

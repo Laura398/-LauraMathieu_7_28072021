@@ -15,6 +15,9 @@
         </div>
       </div>
     </div>
+    <div class="footer">
+      <Footer />
+    </div>
   </div>
 </template>
 
@@ -22,13 +25,15 @@
 import PostsComponent from '@/components/PostsComponent.vue'
 import ProfileComponent from '@/components/ProfileComponent.vue'
 import ModalAddPost from '@/components/ModalAddPostComponent.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
-  name: ['Posts', 'Profile', 'ModalAddPost'],
+  name: ['Posts', 'Profile', 'ModalAddPost', 'Footer'],
   components: {
     PostsComponent,
     ProfileComponent,
-    ModalAddPost
+    ModalAddPost,
+    Footer
   },
   data() {
       return {
@@ -45,6 +50,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.profile-component {
+  margin-left: 60px;
+  margin-right: -60px;
+ }
+
 .post {
   position: relative;
   background-color: #f7eaea;
@@ -76,7 +86,7 @@ export default {
   height: 120px;
   width: 109%;
   img { 
-    top: 10px;
+    top: -10%;
     margin-left: -30px;
     width: 100%;
   }
@@ -85,6 +95,8 @@ export default {
 .profile-component {
   position: absolute;
   top: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
   
 }

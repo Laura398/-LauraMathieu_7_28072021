@@ -1,7 +1,7 @@
 <template>
-  <div class="modify container">
+  <div class="modify container pt-5">
     <a class="btn btn-primary float-left" role="button" href="http://localhost:8080/#/">Retour</a>
-    <h1 class="h5">Vous pouvez modifier votre commentaire ici.</h1>
+    <h1 class="h5 message">Vous pouvez modifier votre commentaire ici.</h1>
     <ModifyCommentComponent />
   </div>
 </template>
@@ -21,5 +21,15 @@ export default {
 .btn {
   position: fixed;
   margin-left: -23%;
+}
+
+.container {
+  background-color: #f7eaea;
+}
+
+@media all and (max-width: 768px){
+  .message {
+    margin-top: 50px;
+  }
 }
 </style>

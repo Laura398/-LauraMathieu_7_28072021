@@ -1,12 +1,12 @@
 <template>
-  <div class="hello w-75 m-auto">
+  <div class="hello w-100 m-auto">
     <ul v-if="adminIsAdmin === true" class="list-group list-group-numbered">
       <li class="list-group-item d-flex justify-content-between align-items-start" v-for='user in users' :key='user.id'>
         <div class="ms-2 me-auto">
           <div class="fw-bold">{{user.firstName}} {{user.lastName}}</div>
           {{user.email}}
         </div>
-        <span v-if="user.isAdmin === true" class="btn-info col-4 rounded-pill p-1">Administrateur</span> <input v-if="user.isAdmin === true" type="submit" class="btn-danger col-4 rounded-pill p-1" v-bind="user.id" @click="userIdForAdmin = user.id" :onclick="removeAdmin" value="Retirer le statut d'administrateur">
+        <span v-if="user.isAdmin === true" class="btn-info col-4 rounded-pill p-1 disabled">Administrateur</span> <input v-if="user.isAdmin === true" type="submit" class="btn-danger col-4 rounded-pill p-1" v-bind="user.id" @click="userIdForAdmin = user.id" :onclick="removeAdmin" value="Retirer le statut d'administrateur">
         <input v-if="user.isAdmin === false" type="submit" class="btn-primary col-4 rounded-pill p-1" v-bind="user.id" @click="userIdForAdmin = user.id" :onclick="addAdmin" value="Désigner en tant qu'administrateur">
       </li>
     </ul>
@@ -61,6 +61,8 @@ export default {
 </script>
 
 <style scoped>
-
+.hello {
+  padding-bottom: 80px;
+}
 
 </style>
