@@ -38,7 +38,7 @@
             <div class="row ">
               <div class="col-12 col-md-4 my-3 mx-auto">
                 <label for="validationDefault03" class="form-label">Mot de passe : {{password}}</label>
-                <input v-model="password" type="text" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="password">
+                <input v-model="password" type="password" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="password">
               </div>
             </div>
             <div class="row my-3">

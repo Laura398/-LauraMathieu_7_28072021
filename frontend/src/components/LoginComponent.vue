@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-5 my-3 mx-auto">
           <label for="validationDefault03" class="form-label">Mot de passe</label>
-          <input v-model="password" type="text" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="password" required>
+          <input v-model="password" type="password" class="form-control" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" id="password" required>
         </div>
         <div class="col-12 my-3">
           <button class="btn" type="submit" @click="login()">Connexion</button>
