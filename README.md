@@ -15,6 +15,6 @@ Lancer le serveur vuejs avec npm run serve. Le site sera accessible en local ave
 Le site fonctionne avec une database MySQL.
 Créer une base de données nommée "groupomania" dans MySQL.
 Deux possibilités :
-- enregistrer un utilisateur nommé development et ayant pour mot de passe password.
-- se connecter avec un utilisateur différent. Dans ce cas, il faudra modifier les informations dans le fichier backend/config/config.json, dans la partie development, et renseigner votre username et password.
+Soit enregistrer un utilisateur nommé development et ayant pour mot de passe password.
+Soit se connecter avec un utilisateur différent. Dans ce cas, il faudra modifier les informations dans le fichier backend/config/config.json, dans la partie development, et renseigner votre username et password.
 Un fichier pour initialisation de la database se trouve dans le dossier database.
