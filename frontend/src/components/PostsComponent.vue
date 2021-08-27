@@ -31,6 +31,7 @@
 
 <script>
 import axios from 'axios'
+import jwt_decode from "jwt-decode";
 
 export default {
   name: 'Posts',
@@ -39,7 +40,7 @@ export default {
     UserId: JSON.parse(localStorage.getItem('userId')),
     PostId: '',
     CommentId: '',
-    isAdmin: JSON.parse(localStorage.getItem('isAdmin'))
+    isAdmin: jwt_decode(JSON.parse(localStorage.getItem('token'))).isAdmin
   }),
   computed: {
     posts() {
