@@ -37,7 +37,7 @@ export default {
   name: 'Posts',
   data: () => ({
     text: "",
-    UserId: JSON.parse(localStorage.getItem('userId')),
+    UserId: jwt_decode(JSON.parse(localStorage.getItem('token'))).userId,
     PostId: '',
     CommentId: '',
     isAdmin: jwt_decode(JSON.parse(localStorage.getItem('token'))).isAdmin
@@ -69,7 +69,7 @@ export default {
       this.$store.dispatch("postComment", {
             text: this.text,
             PostId: this.PostId,
-            UserId: JSON.parse(localStorage.getItem('userId'))
+            UserId: jwt_decode(JSON.parse(localStorage.getItem('token'))).userId
         });
         window.location.reload();
     },
