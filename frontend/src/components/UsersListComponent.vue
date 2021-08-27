@@ -15,13 +15,14 @@
 
 <script>
 import axios from 'axios'
+import jwt_decode from "jwt-decode";
 
 export default {
   name: 'UsersList',
   data: () => ({
     isAdmin: '',
     userIdForAdmin: '',
-    adminIsAdmin: JSON.parse(localStorage.getItem('isAdmin'))
+    adminIsAdmin: jwt_decode(JSON.parse(localStorage.getItem('token'))).isAdmin
   }),
   computed: {
     users() {
