@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import jwt_decode from "jwt-decode";
+
 export default {
     name: 'ModalAddPost',
     props: ['revele', 'toggleModale'],
@@ -52,7 +54,7 @@ export default {
             title: this.title,
             content: this.content,
             attachment: this.attachment,
-            UserId: JSON.parse(localStorage.getItem('userId'))
+            UserId: jwt_decode(JSON.parse(localStorage.getItem('token'))).userId
         })
         window.location.reload();
     }}
