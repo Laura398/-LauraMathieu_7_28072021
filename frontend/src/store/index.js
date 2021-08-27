@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import router from '../router'
+import jwt_decode from "jwt-decode";
 
 export default createStore({
 
@@ -231,7 +232,7 @@ export default createStore({
 
     // Get one user
     getOneUser({ commit }) {
-      const userId = JSON.parse(localStorage.getItem('userId'));
+      const userId = jwt_decode(JSON.parse(localStorage.getItem('token'))).userId;
       const token = JSON.parse(localStorage.getItem('token'));
       axios.get(`http://localhost:3000/api/auth/${userId}`, { 
         headers: {
@@ -248,7 +249,7 @@ export default createStore({
 
     // Profile change
     modifyProfile({commit}, data) {
-      const userId = JSON.parse(localStorage.getItem('userId'));
+      const userId = jwt_decode(JSON.parse(localStorage.getItem('token'))).userId;
       const token = JSON.parse(localStorage.getItem('token'));
         axios.put(`http://localhost:3000/api/auth/${userId}`, data, { 
           headers: {
