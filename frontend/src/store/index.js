@@ -84,8 +84,6 @@ export default createStore({
             resolve(true);
             console.log(commit, data);
             localStorage.setItem('token', JSON.stringify(data.token));
-            localStorage.setItem('userId', JSON.stringify(data.userId));
-            localStorage.setItem('isAdmin', JSON.stringify(data.isAdmin));
             router.push("/posts");
           }
         })
