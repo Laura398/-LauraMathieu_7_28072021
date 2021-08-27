@@ -19,10 +19,12 @@
 </template>
 
 <script>
+import jwt_decode from "jwt-decode";
+
 export default {
   name: 'Profile',
   data: () => ({
-    isAdmin: JSON.parse(localStorage.getItem('isAdmin'))
+    isAdmin: jwt_decode(JSON.parse(localStorage.getItem('token'))).isAdmin
   }),
   methods: {
       signout() {
